@@ -1,7 +1,5 @@
 # K8s-lab
 
-# Kubernetes Nginx Example
-
 A minimal beginner-friendly Kubernetes project to deploy an Nginx web server.
 
 This repo contains declarative YAML manifests for:
@@ -11,6 +9,32 @@ This repo contains declarative YAML manifests for:
 ## Prerequisites
 - A running Kubernetes cluster (e.g., Minikube, Kind, or a cloud cluster)
 - `kubectl` configured to access your cluster
+
+## Deploying and Testing the Nginx Application
+
+### Apply the manifests
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
+### Verify pods running, and nginx service
+```bash
+kubectl get pods -l app=nginx
+kubectl get service my-nginx-service
+```
+
+### Access nginx server
+```bash
+minikube service my-nginx-service
+kubectl port-forward svc/my-nginx-service 8080:80
+```
+
+### Cleanup
+```bash
+kubectl delete -f deployment.yaml
+kubectl delete -f service.yaml
+```
 
 # Amazon EKS (Elastic Kubernetes Service)
 Running your own Kubernetes control plane is complex and operationally heavy. Amazon EKS is AWS's managed Kubernetes service that handles the control plane for you.
